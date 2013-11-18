@@ -3,7 +3,11 @@
  */
 
 exports.endpoint = function(req, res){
-	if(req.query['hub.mode'] === 'suscribe'&& req.query['hub.challenge'] && req.query['hub.verify_token'] === '56231201') {
+	console.log(req.query['hub.verify_token']);
+	console.log(req.query['hub.verify_token'] === '56231201');
+	if(req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === '56231201') {
 		res.send(req.query['hub.challenge']);
 	}
+	
+	res.send('bad token');
 };
