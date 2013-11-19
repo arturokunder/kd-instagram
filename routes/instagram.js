@@ -19,7 +19,7 @@ exports.endpoint = function(req, res){
 	else if(req.originalMethod === 'POST') {
 		//process message
 		res.send(200);
-		var result = JSON.parse(req.body);
+		var result = req.body;
 		
 		setTimeout(function() {
 			_insertPosts(result);
