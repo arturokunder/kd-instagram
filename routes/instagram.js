@@ -18,6 +18,8 @@ exports.endpoint = function(req, res){
 	}
 	else if(req.originalMethod === 'POST') {
 		//process message
+		console.log('------Mensaje recibido-------');
+		console.log(req.body);
 		res.send(200);
 		var result = req.body;
 		console.log(result);
