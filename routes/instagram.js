@@ -20,7 +20,7 @@ exports.endpoint = function(req, res){
 		//process message
 		res.send(200);
 		var result = req.body;
-		
+		console.log(result);
 		setTimeout(function() {
 			_insertPosts(result);
 		}, 1);
@@ -30,7 +30,7 @@ exports.endpoint = function(req, res){
 };
 
 function _insertPosts(result) {
-	if(result.meta.code == 200 && result.data) {
+	if(result && result.meta && result.meta.code == 200 && result.data) {
 		
 		var updated = [];
 		for(var i = 0; i < result.data.length; i++) {
