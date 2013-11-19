@@ -18,11 +18,9 @@ exports.endpoint = function(req, res){
 	}
 	else if(req.originalMethod === 'POST') {
 		//process message
-		console.log('------Mensaje recibido-------');
-		console.log(req.body);
+		console.log('------Post recibido-------');
 		res.send(200);
 		var result = req.body;
-		console.log(result);
 		setTimeout(function() {
 			_insertPosts(result);
 		}, 1);
@@ -55,6 +53,9 @@ function _insertPosts(result) {
 	}
 }
 
-function _errorOnInserting(error) {
-	console.log(error);
+function _errorOnInserting(err, res) {
+	if(err) {
+		console.log('-----error------');
+		console.log(error);
+	}
 }
