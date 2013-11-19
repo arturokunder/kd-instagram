@@ -30,7 +30,7 @@ else {
 
 instagram_lib.subscriptions.unsubscribe({ object : 'all' });
 instagram_lib.tags.subscribe({
-	object_id : 'style',
+	object_id : 'instaday',
 	callback_url : 'http://glacial-sands-1133.herokuapp.com/instagram/endpoint',
 	verify_token : '56231201'
 });
