@@ -11,18 +11,32 @@ var postsDB = db.collection('posts');
 var instagram_lib = global.instagram_lib;
 
 
+exports.registerSavedTags = function() {
+	instagram_lib.subscriptions.unsubscribe({ object : 'all' });
+	
+	tagsDB.find(function(err, docs) {
+		if(!err && docs) {
+			instagram_lib.tags.subscribe({
+				object_id : 'instaday',
+				callback_url : 'http://glacial-sands-1133.herokuapp.com/instagram/endpoint',
+				verify_token : '56231201'
+			});
+		}
+	});
+};
+
 exports.endpoint = function(req, res){
 	if(req.originalMethod === 'GET') {
 		if(req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === '56231201') {
 			res.send(req.query['hub.challenge']);
 		}
 		else {
-			/*var result = [{
-				object_id : 'nofilter'
+			 var result = [{
+			        object_id : 'nofilter'
 			}];
 			setTimeout(function() {
-				_insertPosts(result);
-			}, 1);*/
+			        _insertPosts(result);
+			}, 1);
 		}
 	}
 	else if(req.originalMethod === 'POST') {
@@ -53,23 +67,26 @@ function _insertPosts(result) {
 			var tag = updated[i] + '';
 			var now = new Date();
 			//if y timeout para evitar muchos requests por segundo
-			if(!requests[tag] || requests[tag].last_request < now) {
+			//se hace un delay de 3 segs por request de cada tag o hasta que pase el limite de 25 posts
+			if(!requests[tag] || requests[tag].last_request < now || requests[tag].requests > 25 ) {
+				console.log('fetch');
 				var next = new Date();
 				next.setSeconds(now.getSeconds() + 3);
 				requests[tag] = {
 						tag : tag,
-						last_request : next
+						last_request : next,
+						requests : 0
 				};
 				
 				setTimeout(function() {
-					console.log('fetch');
+					
 					instagram_lib.tags.recent({
 						name : tag,
 						complete : function(posts, pagination) {
 							console.log('fetch-completed');
 							if(posts) {
 								for(var j = 0; j < posts.length; j++) {
-									postsDB.update({ id : posts[j].id }, posts[j], { upsert : true }, _errorOnInserting);
+									postsDB.update({ id : posts[j].id }, posts[j], { upsert : true }, _completedDB);
 								}
 							}
 						},
@@ -79,11 +96,14 @@ function _insertPosts(result) {
 					});
 				}, 3*1000);
 			}
+			else if(requests[tag]) {
+				requests[tag].requests = requests[tag].requests + 1;
+			}
 		}
 	}
 }
 
-function _errorOnInserting(err, res) {
+function _completedDB(err, res) {
 	if(err) {
 		console.log(err);
 	}
