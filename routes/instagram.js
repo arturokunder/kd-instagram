@@ -31,12 +31,12 @@ exports.endpoint = function(req, res){
 			res.send(req.query['hub.challenge']);
 		}
 		else {
-			 var result = [{
+			 /*var result = [{
 			        object_id : 'nofilter'
 			}];
 			setTimeout(function() {
 			        _insertPosts(result);
-			}, 1);
+			}, 1);*/
 		}
 	}
 	else if(req.originalMethod === 'POST') {
