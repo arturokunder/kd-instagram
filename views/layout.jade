@@ -1,7 +1,120 @@
-doctype 5
+!!! 5
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		title 
+			| kunder - 
+			block title
+				| Inicio
+		
+		link(href='img/favicon.ico', type='image/x-icon', rel='shortcut icon')
+
+		//LIB CSS
+		link(rel='stylesheet', type='text/css', media='screen', href='css/lib/bootstrap/bootstrap.css')
+		link(rel='stylesheet', type='text/css', media='screen', href='css/lib/bootstrap/navbar-fixed-top.css')
+		
+		//KUNDER BASE CSS
+		link(rel='stylesheet', type='text/css', media='screen', href='css/kunder.base.css')
+		link(rel='stylesheet', type='text/css', media='screen', href='css/kunder.instagram.base.css')
+		
+		//CUSTOM CSS
+		block css
+
+
+		link(rel='stylesheet', type='text/css', media='screen', href='css/lib/bootstrap/bootstrap.css')
+		link(rel='stylesheet', type='text/css', media='screen', href='css/lib/bootstrap/navbar-fixed-top.css')
+		
+		//LIB JS
+		script(src='http://code.jquery.com/jquery-1.10.1.min.js')
+		script(type='text/javascript', src='js/lib/bootstrap/bootstrap.min.js')
+		
+		//if lt IE 9
+			script(src='js/lib/bootstrap/assets/html5shiv.js')
+			script(src='js/lib/bootstrap/assets/respond.min.js')
+		
+		script(type='text/javascript', src='js/kunder.csrf.js', charset='UTF-8', data-filter='base')
+		
+		//CUSTOM JS
+		block js
+		
+		link(rel='stylesheet', type='text/css', media='screen', href='css/kunder.base.css')
+		
+		block css
+		
+		
+		
+	body#body
+		#top
+		.content-wrapper	
+			.navbar.navbar-fixed-top.navbar-inverse.hidden-print(role='navigation')
+				.container
+					.navbar-header
+						button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+						a.navbar-brand(
+						href="http://www.kunder.cl")
+							.kunder-logo.hover-white
+					#main-menu
+						.navbar-collapse.collapse
+							ul.nav.navbar-nav
+								
+							ul.nav.navbar-nav.navbar-right
+								li.dropdown
+									a.dropdown-toggle(href='#', data-toggle='dropdown')
+											span.glyphicon.glyphicon-th
+											b.caret
+										ul.dropdown-menu
+											li.dropdown-header 
+												| Servicios
+											li
+												a(href="http://www.kunder.cl/reports")
+													span.product-icon.encuestas
+													span.after-icon Reportes de encuestas
+											li
+												a(href="http://www.kunder.cl/monitor")
+													span.product-icon.monitoreo
+													span.after-icon Monitoreo Twitter
+											li.active
+												a(href="http://www.kunder.cl/monitor")
+													span.product-icon.monitoreo
+													span.after-icon Monitoreo Instagram
+								
+			.row.row-fix-right-margin
+				.col-xs-12.col-sm-2.col-md-3.col-lg-2.sidenav-column
+					.nav-sidebar.hidden-print(role="complementary")
+						ul.nav.nav-menu
+							
+							li(class="active open-menu")
+								a(href="/")
+									span.menu-icon.pull-left(data-icon='panel')
+									span.hidden-sm Panel
+									span.visible-sm &nbsp;
+							
+							li(class="")
+								a(href="")
+									span.menu-icon.pull-left(data-icon='tweets')
+									span.hidden-sm Menu 2
+									span.visible-sm &nbsp;
+									
+							li(class="")
+								a(href="/config")
+									span.menu-icon.pull-left(data-icon='cloud')
+									span.hidden-sm Configuraci&oacute;n
+									span.visible-sm &nbsp;		
+							
+							li(class="")
+								a(href="")
+									span.menu-icon.pull-left(data-icon='map')
+									span.hidden-sm 
+										| Menu 4
+									span.visible-sm &nbsp;
+								
+				.col-xs-12.col-sm-10.col-md-9.col-lg-10.content-column(role="main")
+					.pull-right.content-menu
+						
+					.clearfix
+					.content-block			
+						block content 
+		
+		include partials/footer

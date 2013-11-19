@@ -1,0 +1,16 @@
+extends layout
+
+block js
+	script(type='text/javascript', src='js/kunder.instagram.config.js')
+
+block title
+	| Configuraci&oacute;n
+
+block content
+	.row
+		.col-md-6
+			table.table
+	a#newTag(href="#") Nuevo
+	
+	script(type='text/javascript')
+		kunder.Instagram.Config.Initialize();

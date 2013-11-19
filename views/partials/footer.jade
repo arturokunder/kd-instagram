@@ -1,0 +1,60 @@
+.footer	
+	.container
+		.row.footer-content
+			.col-sm-8
+				p
+					.row
+						.col-sm-3.footer-logo
+							.kunder-logo.black.small.hover-green
+							.kunder-slogan.small
+						.col-sm-4
+							br.visible-xs
+							a.contact-info.mail(href="mailto:contacto@kunder.cl?Subject=Contacto%20web", target="_blank")
+								span.glyphicon.glyphicon-envelope
+								span &nbsp;&nbsp;contacto@kunder.cl
+							br
+							br.visible-xs
+							a.contact-info.number(href="tel:+56999170035") 
+								span.glyphicon.glyphicon-earphone
+								span &nbsp;&nbsp;+56 9 9917 0035
+							br.visible-xs
+							br.visible-xs
+						.col-sm-2
+							a.contact-info.twitter.twitter-follow-button(href='https://twitter.com/kunder_cl', data-show-count='false', data-lang='es')
+								| Seguir a @kunder_cl
+							script
+								!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');	
+			.col-sm-4
+				p
+					.row
+						.col-sm-5.col-sm-offset-7
+							a#go-top.go-top(href="#top") 
+								br.visible-xs
+								| Arriba &nbsp;
+								span.glyphicon.glyphicon-chevron-up
+							br.visible-xs
+								
+script(type="text/javascript")
+	window.setTimeout(jqueryDefined ,200);
+	function jqueryDefined() {
+		if(typeof $ !== 'undefined') {
+			$(document).ready(function() {
+				showHideGoTop();
+				$(window).on('resize', showHideGoTop);
+				//manual override for content resizes
+				$(document).on('resize', showHideGoTop);
+			});
+		}
+		else {
+			window.setTimeout(jqueryDefined ,200);
+		}
+	}
+	
+	function showHideGoTop() {
+		if($(document).height() > $(window).height() * 1.1) {
+			$('#go-top').show();
+		}
+		else {
+			$('#go-top').hide();
+		}
+	}

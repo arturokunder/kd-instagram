@@ -4,51 +4,63 @@
  */
 
 var express = require('express'),
-	routes = require('./routes'),
-	instagram = require('./routes/instagram'),
 	http = require('http'),
-	path = require('path');
-
-var request = require('request');
+	path = require('path'),
+	mongojs = require('mongojs');
 
 var app = express();
+
+var settings = global.settings = require('config');
+var db;
+if (process.env.MONGOLAB_URI) {
+  db = global.mongodb = mongojs(process.env.MONGOLAB_URI);
+} else {
+  db = global.mongodb = mongojs('mongodb://' + settings.mongodb.user + ':' + settings.mongodb.password + "@" + settings.mongodb.url);
+}
+
+var instagram_lib = global.instagram_lib = require('instagram-node-lib');
+if(process.env.instagram && process.env.instagram.client_id && process.env.instagram.client_secret) {
+	instagram_lib.set('client_id', process.env.instagram.client_id);
+	instagram_lib.set('client_secret', process.env.instagram.client_secret);
+}
+else {
+	instagram_lib.set('client_id', settings.instagram.client_id);
+	instagram_lib.set('client_secret', settings.instagram.client_secret);
+}
+
+var routes = require('./routes'),
+	ajax = require('./routes/ajax'),
+	instagram = require('./routes/instagram');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
-app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // development only
 if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//WEB
 app.get('/', routes.index);
+app.get('/config', routes.config);
+
+//AJAX
+app.post('/ajax/config/addTag', ajax.addTag);
+
+//Instagram endpoints
 app.get('/instagram/endpoint', instagram.endpoint);
+app.post('/instagram/endpoint', instagram.endpoint);
 
-var options = {
-	'client_id' : '2113c38b9e7c4a6b925ab5f9ccd6c58b',
-	'client_secret' : '0ab14762ddde44e4914efde236764536',
-	'object' : 'tag',
-	'aspect' : 'media',
-	'object_id' : 'nofilter',
-	'verify_token' : '56231201',  //client defined
-	'callback_url' : 'http://glacial-sands-1133.herokuapp.com/instagram/endpoint'
-};
 
-request({
-	url : 'https://api.instagram.com/v1/subscriptions/',
-	method : 'POST',
-	form : options
-}, function(error, response, body) {
-	console.log(body);
-});
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

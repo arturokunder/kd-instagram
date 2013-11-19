@@ -1,0 +1,5 @@
+{
+	"mongodb" : {
+		"url" : "ds053668.mongolab.com:53668/heroku_app19595553"
+	}
+}

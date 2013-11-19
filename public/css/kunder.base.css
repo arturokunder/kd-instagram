@@ -1,0 +1,273 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+@font-face {
+	font-family: Kunder;
+	src: url(../fonts/kunder.font.regular.otf);
+	src: url('../fonts/kunder.font.regular.otf?#iefix') format('opentype');
+}
+@font-face {
+	font-family: Kunder;
+	src: url(../fonts/kunder.font.bold.otf);
+	src: url('../fonts/kunder.font.bold.otf?#iefix') format('opentype');
+	font-weight: 500;
+}
+@font-face {
+	font-family: Kunder;
+	src: url(../fonts/kunder.font.bold.otf);
+	src: url('../fonts/kunder.font.bold.otf?#iefix') format('opentype');
+	font-weight: bold;
+}
+@font-face {
+  font-family: Kunder;
+  src: url(http://themes.googleusercontent.com/static/fonts/lato/v6/oUan5VrEkpzIazlUe5ieaA.woff) format('woff');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/lib/bootstrap/glyphicons-halflings-regular.eot');
+  src: url('../fonts/lib/bootstrap/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+  url('../fonts/lib/bootstrap/glyphicons-halflings-regular.woff') format('woff'), 
+  url('../fonts/lib/bootstrap/glyphicons-halflings-regular.ttf') format('truetype'), 
+  url('../fonts/lib/bootstrap/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+* {
+	font-family: Kunder, 'Open Sans', Helvetica, sans-serif;
+}
+
+html,body {
+	height:100%;
+	background-color: #f5f5f5;
+}
+
+body {
+	padding-top: 60px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: Kunder, 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+/* kunder logo */
+.kunder-logo {
+	color: #28f03c;
+	font-weight: bold;
+	font-family: Kunder !important;
+	text-transform: none;
+}
+
+.kunder-logo:after {
+	content: ' kunder ';
+}
+
+.kunder-logo:hover {
+	color: #2b2b2b;
+}
+
+.kunder-logo.black {
+	color: #2b2b2b;
+}
+
+.kunder-logo.black:hover {
+	color: #f5f5f5;
+}
+
+.kunder-logo.hover-green:hover {
+	color: #28f03c;
+}
+
+.kunder-logo.hover-black:hover {
+	color: #2b2b2b;
+}
+
+.kunder-logo.hover-white:hover {
+	color: #f5f5f5;
+}
+
+.kunder-logo.small {
+	font-size: 26px;
+}
+.kunder-slogan {
+	color: #2b2b2b;
+}
+
+.kunder-slogan:after {
+	content: 'Te ayudamos a conocer a tu cliente';
+} 
+
+.kunder-slogan.small {
+	font-family: 'Open Sans', Helvetica, sans serif;
+	font-size: 10px;
+}
+
+/* Productos icon */
+span.product-icon {
+	float: left;
+	width: 20px;
+	height: 20px;
+	background-size: 20px 40px; 
+	margin-top: -6px;
+	margin-bottom: 2px;
+}
+span.product-icon.large {
+	width: 64px;
+	height: 64px;
+	background-size: 64px 128px; 
+	margin-top: -12px;
+	margin-bottom: 6px;
+}
+
+/* icono hover: solo y dentro de menus */
+span.product-icon:hover,
+span.product-icon.active,
+li:hover > a > span.product-icon,
+li > a:hover > span.product-icon,
+li.active > a > span.product-icon {
+	background-position: 0 20px; 
+}
+
+a:hover span.product-icon,
+a:active span.product-icon,
+a:focus span.product-icon {
+	background-position: 0 64px; 
+}
+
+span.product-icon.large:hover,
+span.product-icon.active.large,
+li:hover > a > span.product-icon.large,
+li > a:hover > span.product-icon.large,
+li.active > a > span.product-icon.large {
+	background-position: 0 64px; 
+}
+
+a:hover span.product-icon.large,
+a:active span.product-icon.large,
+a:focus span.product-icon.large {
+	background-position: 0 64px; 
+}
+
+span.product-icon.encuestas {
+	background-image: url(../img/kunder.encuestas.icon.svg);
+}
+span.product-icon.monitoreo {
+	background-image: url(../img/kunder.monitoreo.icon.svg);
+}
+span.product-icon.alertas {
+	background-image: url(../img/kunder.alertas.icon.svg);
+}
+span.product-icon.investigacion {
+	background-image: url(../img/kunder.investigacion.icon.svg);
+}
+
+/* Contenido y footer */
+.content-wrapper {
+	min-height: 100%;
+	height: auto !important;
+	/* Negative indent footer by its height */
+	margin: 0 auto -95px;
+	/* Pad bottom by footer height */
+	padding: 0 0 80px;
+	
+}
+
+.footer {
+	min-height: 80px;
+	background-color: #f0f0f0;
+	background-image: url(../img/footer-textura.png);
+}
+
+.footer .footer-content {
+	margin-top: 10px;
+}
+
+.footer .footer-logo {
+	margin-top: -17px;
+}
+
+.footer .kunder-logo, .footer .kunder-slogan {
+	text-align: center;
+}
+
+.footer a.go-top > span {
+	color: #62abea;
+	top: 2px;
+}
+
+.footer a.go-top:hover, .footer a.go-top:focus, .footer a.go-top:active,
+.footer a.go-top:hover > span, .footer a.go-top:focus > span, .footer a.go-top:active > span {
+	text-decoration: none;
+	color: #2a6496;
+}
+
+@media (max-width: 768px) {
+	.footer {
+		text-align: center;
+	}
+}
+
+/* menu de navegacion */
+.navbar-kunder-white {
+	background-color: #f0f0f0;
+	border-color: #e0e0e0;
+}
+
+.navbar .navbar-brand {
+	font-size: 32px;
+}
+
+.navbar-fixed-top ul li {
+	text-transform: uppercase;
+}
+
+.navbar-nav > li > a {
+	padding-bottom: 5px;
+	line-height: 30px;
+}
+
+.navbar-fixed-top ul.dropdown-menu * {
+	text-transform: none;
+	text-align: left;
+}
+
+.navbar-fixed-top ul.dropdown-menu > li > a > span.after-icon {
+	margin-right: 25px;
+}
+
+.navbar-fixed-top ul.dropdown-menu > .dropdown-header {
+	font-family: 'Open Sans', Helvetica, sans-serif;
+}
+
+/* Kunder btn */
+.btn-kunder {
+	color: #333333;
+	background-color: #20e233;
+	border-color: #08d01c;
+}
+
+.btn-kunder:hover, .btn-kunder:focus, .btn-kunder:active, 
+.btn-kunder.active, .open .dropdown-toggle.btn-kunder {
+	background-color: #08d01c;
+	border-color: #08c00c;
+}
+
+/* Custom list */
+ul.kunder-list {
+	list-style:none;
+	padding-left: 2em;
+}
+
+ul.kunder-list li:before
+{
+    content: '\003E';
+    margin: 0 1em 0 0;
+    font-family: Kunder;
+    font-size: 1.2em;
+}
+
+ul.kunder-list li {
+	text-indent: -1em;
+}
+
+
