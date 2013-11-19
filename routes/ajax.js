@@ -14,4 +14,6 @@ exports.addTag = function(req, res) {
 		callback_url : 'http://glacial-sands-1133.herokuapp.com/instagram/endpoint',
 		verify_token : '56231201'
 	}));
+	
+	console.log('sended');
 };
