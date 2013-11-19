@@ -7,7 +7,7 @@ kunder.Instagram.Config = (function($) {
 	}
 	
 	function _newTag(tag) {
-		tag = 'hola';
+		tag = 'nofilter';
 		return $.ajax({
 			url:	'/ajax/config/addTag',
 			type:	'POST',
