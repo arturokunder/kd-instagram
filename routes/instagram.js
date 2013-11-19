@@ -32,12 +32,12 @@ exports.endpoint = function(req, res){
 };
 
 function _insertPosts(result) {
-	if(result && result.meta && result.meta.code == 200 && result.data) {
+	if(Array.isArray(result)) {
 		
 		var updated = [];
-		for(var i = 0; i < result.data.length; i++) {
-			if(updated.indexOf(result.data[i].object_id) < 0) {
-				updated.push(result.data[i].object_id);
+		for(var i = 0; i < result.length; i++) {
+			if(result[i].object_id && updated.indexOf(result[i].object_id) < 0) {
+				updated.push(result[i].object_id);
 			}
 		}
 		
@@ -46,8 +46,10 @@ function _insertPosts(result) {
 				name : updated[i]
 			});
 			
-			for(var j = 0; j < posts.data.length; j++) {
-				postsDB.update({ id : posts[j].id }, posts[j], { upsert : true}, _errorOnInserting);
+			if(posts.data) {
+				for(var j = 0; j < posts.data.length; j++) {
+					postsDB.update({ id : posts[j].id }, posts[j], { upsert : true}, _errorOnInserting);
+				}
 			}
 		}
 	}
