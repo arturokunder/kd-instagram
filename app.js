@@ -28,12 +28,12 @@ else {
 	instagram_lib.set('client_secret', settings.instagram.client_secret);
 }
 
-instagram_lib.subscriptions.unsubscribe_all();
+instagram_lib.subscriptions.unsubscribe({ object : 'all' });
 instagram_lib.tags.subscribe({
 	object_id : 'style',
 	callback_url : 'http://glacial-sands-1133.herokuapp.com/instagram/endpoint',
 	verify_token : '56231201'
-})
+});
 
 var routes = require('./routes'),
 	ajax = require('./routes/ajax'),
