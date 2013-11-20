@@ -1,0 +1,67 @@
+.post {
+	float: left;
+	height: 450px;
+	width: 300px;
+	padding: 10px;
+	margin: 3px;
+	background-color: #fbfbfb;
+	box-shadow: -2px 2px 2px -2px #f1f1f3;
+	border: 1px solid #f2f2f2;
+}
+
+.post:hover {
+	border: 1px solid #e2e2e2;
+	background-color: #f9f9f9;
+	box-shadow: -3px 3px 3px -3px #f0f0f1;
+}
+
+.post .user {
+	margin-bottom: 5px;
+	font-weight: bold;
+	font-size: 16px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.post .user .username {
+	margin-left: 10px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.post .user .username .fullname {
+	font-family: 'Open-sans', Helvetica, Sans-serif;
+	font-size: 10px;
+	margin-top: -3px;
+}
+
+.post .user .username .created_time {
+	font-family: 'Open-sans', Helvetica, Sans-serif;
+	font-size: 10px;
+}
+
+.post .user .profile-picture {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.post .user .profile-picture img {
+	width: 40px;
+}
+
+.post .picture {
+	text-align: center;
+}
+.post .picture img {
+	width: 280px;
+}
+
+.post .picture img.load {
+	height: 280px;
+}
+
+.post .caption {
+	padding: 10px;
+	font-family: 'Open-sans', Helvetica, Sans-serif;
+	font-size: 12px;
+	word-wrap: break-word;
+}

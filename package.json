@@ -11,6 +11,7 @@
     "request": "~2.27.0",
     "instagram-node-lib": "~0.1.1",
     "mongojs": "~0.9.6",
-    "config": "~0.4.33"
+    "config": "~0.4.33",
+    "moment": "~2.4.0"
   }
 }

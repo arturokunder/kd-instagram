@@ -16,11 +16,15 @@ exports.registerSavedTags = function() {
 	
 	tagsDB.find(function(err, docs) {
 		if(!err && docs) {
-			instagram_lib.tags.subscribe({
-				object_id : 'instaday',
-				callback_url : 'http://glacial-sands-1133.herokuapp.com/instagram/endpoint',
-				verify_token : '56231201'
-			});
+			var completed = function() {};
+			for(var i = 0; i < docs.length; i++) {
+				instagram_lib.tags.subscribe({
+					object_id : docs[i].tag,
+					callback_url : 'http://glacial-sands-1133.herokuapp.com/instagram/endpoint',
+					verify_token : '56231201',
+					complete : completed
+				});
+			}
 		}
 	});
 };

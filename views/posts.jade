@@ -1,0 +1,46 @@
+extends layout
+
+block js
+	script(type='text/javascript', src='js/kunder.instagram.posts.js')
+
+block css
+	link(rel='stylesheet', type='text/css', media='screen', href='css/kunder.instagram.posts.css')
+
+block title
+	| Configuraci&oacute;n
+
+block content
+	each p in posts
+		.post
+			if p.link
+				a.pull-right(href="#{p.link}", target="_blank")
+					span.glyphicon.glyphicon-share-alt
+					
+			if p.user && p.user.username
+				.user
+					a(href="http://instagram.com/#{p.user.username}", target="_blank")
+						if p.user.profile_picture
+							.profile-picture
+								img.load.img-circle(data-src="#{p.user.profile_picture}")
+						.username
+							| #{p.user.username}
+							if p.user.full_name
+								.fullname
+									| #{ p.user.full_name }
+							if p.created_time	
+								.created_time
+									| #{ moment(p.created_time * 1000).fromNow() }
+			if p.images && p.images.standard_resolution && p.images.low_resolution.url
+				.picture
+					img.load.img-thumbnail(data-src="#{p.images.low_resolution.url}")
+					
+			if p.caption && p.caption.text
+				.caption
+					if p.caption.text.length >= 200
+						| #{ p.caption.text.substring(0, 197) }...
+					else
+						| #{p.caption.text}
+			
+	
+	script(type='text/javascript').
+		kunder.Instagram.Posts.Initialize();

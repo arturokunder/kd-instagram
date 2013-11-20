@@ -9,8 +9,24 @@ block title
 block content
 	.row
 		.col-md-6
-			table.table
-	a#newTag(href="#") Nuevo
+			table.table.table-hover
+				thead
+					tr
+						th Hashtags
+						th
+				tbody
+					each tag in tags
+						tr
+							td ##{ tag.tag }
+							td
+								a.remove(href="#", data-id="#{ tag._id }")
+									span.glyphicon.glyphicon-remove
+					tr#insert-row
+						td 
+							input#add-input
+						td
+							a#add-link(href="#")
+									span.glyphicon.glyphicon-ok
 	
-	script(type='text/javascript')
+	script(type='text/javascript').
 		kunder.Instagram.Config.Initialize();

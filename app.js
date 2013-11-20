@@ -6,7 +6,7 @@
 var express = require('express'),
 	http = require('http'),
 	path = require('path'),
-	mongojs = require('mongojs');
+	mongojs = global.mongojs = require('mongojs');
 
 var app = express();
 
@@ -52,17 +52,19 @@ if ('development' === app.get('env')) {
 
 //WEB
 app.get('/', routes.index);
+app.get('/posts', routes.posts);
 app.get('/config', routes.config);
 
 //AJAX
 app.post('/ajax/config/addTag', ajax.addTag);
+app.post('/ajax/config/removeTag', ajax.removeTag);
 
 //Instagram endpoints
 app.get('/instagram/endpoint', instagram.endpoint);
 app.post('/instagram/endpoint', instagram.endpoint);
 
-
-
+app.locals.moment = require('moment');
+app.locals.moment.lang('es');
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

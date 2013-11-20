@@ -12,8 +12,19 @@ exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };
 
+exports.posts = function(req, res) {
+	postsDB.find().sort({ created_time : -1 }).limit(30, function(err, docs){
+		if(!err) {
+			res.render('posts', { posts: docs });
+		}
+	});
+	
+}
+
 exports.config = function(req, res) {
-	
-	
-	res.render('config');
+	tagsDB.find().sort({ tag : 1 }, function(err, docs){
+		if(!err && docs){
+			res.render('config', { tags : docs });
+		}
+	});
 };
