@@ -90,40 +90,49 @@ function _insertPosts(result) {
 					};
 				
 				setTimeout(function() {
-					
-					instagram_lib.tags.recent({
-						name : tag,
-						complete : function(posts, pagination) {
-							console.log('fetch-completed');
-							if(posts) {
-								for(var j = 0; j < posts.length; j++) {
-									posts[j].received_at = new Date();
-									
-									if(posts[j].created_time) {
-										posts[j].created_time = new Date(posts[j].created_time * 1000);
-									}
-									if(posts[j].caption && posts[j].caption.created_time) {
-										posts[j].caption.created_time = new Date(posts[j].caption.created_time * 1000);
-									}
-									if(posts[j].comments && posts[j].comments.data && posts[j].comments.data.length > 0) {
-										for(var c = 0; c < posts[j].comments.data.length; c++) {
-											if(posts[j].comments.data[c].created_time) {
-												posts[j].comments.data[c].created_time = new Date(posts[j].comments.data[c].created_time * 1000);
+					tagsDB.findOne({ tag : tag }, function(err, doc){
+						var now = new Date();
+						var insertedTagDate = (new Date()).setDate(now.getDate() - 1);
+						if(!err && doc.inserted) {
+							insertedTagDate = doc.inserted;
+						}
+						instagram_lib.tags.recent({
+							name : tag,
+							complete : function(posts, pagination) {
+								console.log('fetch-completed');
+								if(posts) {
+									for(var j = 0; j < posts.length; j++) {
+										posts[j].received_at = new Date();
+										
+										if(posts[j].created_time) {
+											posts[j].created_time = new Date(posts[j].created_time * 1000);
+											if(posts[j].created_time < insertedTagDate) {
+												continue;
 											}
 										}
+										if(posts[j].caption && posts[j].caption.created_time) {
+											posts[j].caption.created_time = new Date(posts[j].caption.created_time * 1000);
+										}
+										if(posts[j].comments && posts[j].comments.data && posts[j].comments.data.length > 0) {
+											for(var c = 0; c < posts[j].comments.data.length; c++) {
+												if(posts[j].comments.data[c].created_time) {
+													posts[j].comments.data[c].created_time = new Date(posts[j].comments.data[c].created_time * 1000);
+												}
+											}
+										}
+										
+										postsDB.update({ id : posts[j].id }, posts[j], { upsert : true }, _completedDB);
 									}
-									
-									postsDB.update({ id : posts[j].id }, posts[j], { upsert : true }, _completedDB);
 								}
+								else {
+									console.log('no posts after fetch');
+								}
+							},
+							error : function(message, object, caller) {
+								console.log('error fetching objects');
+								console.log(message);
 							}
-							else {
-								console.log('no posts after fetch');
-							}
-						},
-						error : function(message, object, caller) {
-							console.log('error fetching objects');
-							console.log(message);
-						}
+						});
 					});
 				}, 3*1000);
 			}

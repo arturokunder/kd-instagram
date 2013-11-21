@@ -4,5 +4,6 @@ block title
 	| Inicio
 
 block content
-	h1= title
-	p Welcome to #{title}
+	for p in postByDay
+		| #{moment(p.date).format('DD/MM/YYYY')} : #{p.posts}
+		br
