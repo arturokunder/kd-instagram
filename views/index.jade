@@ -7,3 +7,4 @@ block content
 	for p in postByDay
 		| #{moment(p.date).format('DD/MM/YYYY')} : #{p.posts}
 		br
+	| count : #{ count }

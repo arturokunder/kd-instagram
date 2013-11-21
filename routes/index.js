@@ -15,7 +15,10 @@ exports.index = function(req, res){
 	                         { '$sort' : { '_id.year' : 1, '_id.day' : 1 } }
 	                         ],
         function(err, doc) {
-			res.render('index', { postByDay: _dayCorrection(doc) });
+			postsDB.count(function(err2, count) {
+				res.render('index', { postByDay: _dayCorrection(doc), count : count });
+			});
+			
 		});
 };
 
@@ -57,7 +60,7 @@ function _dayCorrection(data) {
 			first_day = key;
 		}
 	}
-	console.log(first_day);
+	
 	var daysBetween = Math.round((last_day - first_day) / (24*60*60*1000)) + 2;
 
 	for(var j = 0; j < daysBetween; j++) {

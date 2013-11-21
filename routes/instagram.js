@@ -7,6 +7,7 @@ var db = global.mongodb;
 
 var tagsDB = db.collection('tags');
 var postsDB = db.collection('posts');
+var requestsDB = db.collection('requests');
 
 var instagram_lib = global.instagram_lib;
 
@@ -133,6 +134,7 @@ function _insertPosts(result) {
 								console.log(message);
 							}
 						});
+						requests.insert({ date : new Date(), type : 'tags.recent', object : tag });
 					});
 				}, 3*1000);
 			}
