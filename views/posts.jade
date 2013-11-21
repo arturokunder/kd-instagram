@@ -29,7 +29,7 @@ block content
 									| #{ p.user.full_name }
 							if p.created_time	
 								.created_time
-									| #{ moment(p.created_time * 1000).fromNow() }
+									| #{ moment(p.created_time).fromNow() }
 			
 			if p.videos && p.videos.low_resolution
 				.video

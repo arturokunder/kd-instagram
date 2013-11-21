@@ -100,15 +100,15 @@ function _insertPosts(result) {
 									posts[j].received_at = new Date();
 									
 									if(posts[j].created_time) {
-										posts[j].created_time = new Date(posts[j].created_time + '000');
+										posts[j].created_time = new Date(posts[j].created_time * 1000);
 									}
 									if(posts[j].caption && posts[j].caption.created_time) {
-										posts[j].caption.created_time = new Date(posts[j].caption.created_time + '000');
+										posts[j].caption.created_time = new Date(posts[j].caption.created_time * 1000);
 									}
 									if(posts[j].comments && posts[j].comments.data && posts[j].comments.data.length > 0) {
 										for(var c = 0; c < posts[j].comments.data.length; c++) {
 											if(posts[j].comments.data[c].created_time) {
-												posts[j].comments.data[c].created_time = new Date(posts[j].comments.data[c].created_time + '000');
+												posts[j].comments.data[c].created_time = new Date(posts[j].comments.data[c].created_time * 1000);
 											}
 										}
 									}
