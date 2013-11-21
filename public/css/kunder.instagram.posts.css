@@ -50,8 +50,33 @@
 
 .post .picture {
 	text-align: center;
+	position: relative;
 }
 .post .picture img {
+	width: 280px;
+}
+
+.post .picture.is-video {
+	cursor: pointer;
+}
+
+.post .picture .play-video {
+	font-size: 30px;
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+
+.post .picture:hover .play-video {
+	color: #28f03c;
+}
+
+.post .video {
+	text-align: center;
+	display: none;
+}
+
+.post .video video {
 	width: 280px;
 }
 

@@ -30,9 +30,18 @@ block content
 							if p.created_time	
 								.created_time
 									| #{ moment(p.created_time * 1000).fromNow() }
-			if p.images && p.images.standard_resolution && p.images.low_resolution.url
-				.picture
+			
+			if p.videos && p.videos.low_resolution
+				.video
+					video.load.img-thumbnail(data-src="#{p.videos.low_resolution.url}")
+						| Video no soportado
+				
+			if p.images && p.images.low_resolution.url
+				.picture(class="#{p.videos && p.videos.low_resolution ? 'is-video': ''}")
 					img.load.img-thumbnail(data-src="#{p.images.low_resolution.url}")
+					if p.videos && p.videos.low_resolution
+						.play-video
+							span.glyphicon.glyphicon-play-circle
 					
 			if p.caption && p.caption.text
 				.caption
