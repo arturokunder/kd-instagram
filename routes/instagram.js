@@ -105,6 +105,7 @@ function _insertPosts(result) {
 							}
 						},
 						error : function(message, object, caller) {
+							console.log('error fetching objects');
 							console.log(message);
 						}
 					});
