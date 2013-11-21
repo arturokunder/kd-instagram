@@ -8,6 +8,8 @@ kunder.Instagram.Posts = (function($) {
 				$(item).attr('src', $(item).data('src'));
 				$(item).removeClass('load');
 			});
+			
+			window.setInterval(_getNewPostsCount, 15000);
 		});
 		
 		$(document).on('click', '.post .picture.is-video', _playVideo);
@@ -31,6 +33,30 @@ kunder.Instagram.Posts = (function($) {
 		picture.hide();
 		video.parent().show();
 		video[0].play();
+	}
+	
+	function _getNewPostsCount(event) {
+		if($('#last-post').val() !== '') {
+			var id = $('#last-post').val();
+
+			return $.ajax({
+				url:	'/ajax/posts/getNewPostsCount',
+				type:	'POST',
+				data:	{
+					id: id,
+				},
+				dataType:	'json',
+				success	: function(data) {
+					if(data.success) {
+						$('.new-posts').text(data.count);
+					}
+				},
+			});
+		}
+		
+		
+		
+		$('.new-posts')
 	}
 	
 	return {

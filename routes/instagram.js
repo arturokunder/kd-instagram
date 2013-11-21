@@ -134,7 +134,7 @@ function _insertPosts(result) {
 								console.log(message);
 							}
 						});
-						requests.insert({ date : new Date(), type : 'tags.recent', object : tag });
+						requestsDB.insert({ date : new Date(), type : 'tags.recent', object : tag });
 					});
 				}, 3*1000);
 			}

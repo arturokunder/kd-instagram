@@ -55,7 +55,9 @@ app.get('/', routes.index);
 app.get('/posts', routes.posts);
 app.get('/config', routes.config);
 
-//AJAX
+//AJAX 
+app.post('/ajax/posts/getNewPostsCount', ajax.getNewPostsCount);
+
 app.post('/ajax/config/addTag', ajax.addTag);
 app.post('/ajax/config/removeTag', ajax.removeTag);
 

@@ -10,6 +10,10 @@ block title
 	| Configuraci&oacute;n
 
 block content
+	input#last-post(type="hidden", name="last", value="#{posts[0]._id}")
+	input#first-post(type="hidden", name="first", value="#{posts[posts.length-1]._id}")
+	.new-posts
+		| 50 nuevos
 	each p in posts
 		.post
 			if p.link

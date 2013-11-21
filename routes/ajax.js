@@ -46,6 +46,17 @@ exports.removeTag = function(req, res) {
 	});
 };
 
+exports.getNewPostsCount = function(req, res) {
+	posts.count({ _id : { '$gt' : req.body.last_id }}, function(err, doc) {
+		if(err) {
+			res.send({ success : false});
+		}
+		else {
+			res.send({ success : true, count : doc });
+		}
+	});
+};
+
 function _completedDB(err, res) {
 	if(err) {
 		console.log(err);
