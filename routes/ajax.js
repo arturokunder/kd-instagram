@@ -26,7 +26,6 @@ exports.addTag = function(req, res) {
 						res.send({ success : false});
 					}
 					else {
-						console.log(doc2);
 						res.send({ success : true, tag : doc2,  });
 					}
 				});
