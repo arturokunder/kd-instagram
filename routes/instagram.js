@@ -35,15 +35,21 @@ exports.endpoint = function(req, res){
 			res.send(req.query['hub.challenge']);
 		}
 		else {
-			 /*var result = [{
-			        object_id : 'nofilter'
+			/*var result = [{
+				object_id : 'nofilter'
 			}];
 			setTimeout(function() {
-			        _insertPosts(result);
+				_insertPosts(result);
 			}, 1);*/
 		}
 	}
 	else if(req.originalMethod === 'POST') {
+		if (req.rawBody === null || req.headers['x-hub-signature'] === void 0 || req.headers['x-hub-signature'] === null) {
+			res.send(403);
+			return;
+			//TODO: verify sender
+		}
+		
 		//process message
 		res.send(200);
 		setTimeout(function() {
@@ -71,16 +77,16 @@ function _insertPosts(result) {
 			var tag = updated[i] + '';
 			var now = new Date();
 			//if y timeout para evitar muchos requests por segundo
-			//se hace un delay de 3 segs por request de cada tag o hasta que pase el limite de 25 posts
-			if(!requests[tag] || requests[tag].last_request < now || requests[tag].requests > 25 ) {
+			//se hace un delay de 5 segs por request de cada tag o hasta que pase el limite de 15 posts
+			if(!requests[tag] || requests[tag].last_request < now || requests[tag].requests > 15 ) {
 				console.log('fetch');
 				var next = new Date();
-				next.setSeconds(now.getSeconds() + 3);
+				next.setSeconds(now.getSeconds() + 5);
 				requests[tag] = {
 						tag : tag,
 						last_request : next,
 						requests : 0
-				};
+					};
 				
 				setTimeout(function() {
 					
@@ -90,8 +96,12 @@ function _insertPosts(result) {
 							console.log('fetch-completed');
 							if(posts) {
 								for(var j = 0; j < posts.length; j++) {
+									posts[j].received_at = new Date();
 									postsDB.update({ id : posts[j].id }, posts[j], { upsert : true }, _completedDB);
 								}
+							}
+							else {
+								console.log('no posts after fetch');
 							}
 						},
 						error : function(message, object, caller) {
