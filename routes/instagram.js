@@ -45,6 +45,7 @@ exports.endpoint = function(req, res){
 	}
 	else if(req.originalMethod === 'POST') {
 		if (req.rawBody === null || req.headers['x-hub-signature'] === void 0 || req.headers['x-hub-signature'] === null) {
+			console.log('Request from another domain');
 			res.send(403);
 			return;
 			//TODO: verify sender
