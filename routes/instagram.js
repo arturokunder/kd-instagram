@@ -94,7 +94,7 @@ function _insertPosts(result) {
 					tagsDB.findOne({ tag : tag }, function(err, doc){
 						var now = new Date();
 						var insertedTagDate = (new Date()).setDate(now.getDate() - 1);
-						if(!err && doc.inserted) {
+						if(!err && doc && doc.inserted) {
 							insertedTagDate = doc.inserted;
 						}
 						instagram_lib.tags.recent({

@@ -47,7 +47,7 @@ exports.removeTag = function(req, res) {
 };
 
 exports.getNewPostsCount = function(req, res) {
-	posts.count({ _id : { '$gt' : req.body.last_id }}, function(err, doc) {
+	posts.count({ _id : { '$gt' : global.mongojs.ObjectId(req.body.id) }}, function(err, doc) {
 		if(err) {
 			res.send({ success : false});
 		}
