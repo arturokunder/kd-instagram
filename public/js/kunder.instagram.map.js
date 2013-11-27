@@ -82,7 +82,7 @@ kunder.Instagram.Map = (function($) {
 			'rgba(255, 0, 0, 1)'
 		];
 		heatmap.set('gradient', gradient);
-		heatmap.set('radius', 15);
+		heatmap.set('radius', 10);
 		heatmap.set('opacity', 1);
 		heatmap.setMap(PostMap);
 	}

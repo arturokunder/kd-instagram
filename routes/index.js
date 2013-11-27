@@ -142,30 +142,11 @@ exports.map = function(req, res) {
 };
 
 exports.config = function(req, res) {
-	postsDB.find().sort({ created_time : -1 }).limit(30, function(err, docs){
-		if(!err) {
-			var first_object = 0;
-			var last_object = 0;
-			
-			if(docs.length > 0) {
-				first_object = docs[0]._id;
-				last_object = docs[0]._id;
-				
-				console.log(first_object);
-				for(var i = 0; i < docs.length; i++) {
-					var object = docs[i]._id;
-
-					if(first_object > object) {
-						first_object = object;
-					}
-					if(last_object < object) {
-						last_object = object;
-					}
-				}
-			}
-			res.render('posts', { title : 'posts', posts: docs, first_object : first_object, last_object : last_object  });
-		}
-	});
+    tagsDB.find().sort({ tag : -1 }, function(err, docs){
+        if(!err && docs){
+                res.render('config', { title : 'config', tags : docs });
+        }
+    });
 };
 
 function _dayCorrection(data) {
