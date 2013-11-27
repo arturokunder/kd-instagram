@@ -18,3 +18,18 @@
 	position: relative;
 	top: -20px;
 }
+
+.username {
+	margin-left: 10px;
+	vertical-align: middle;
+}
+.fullname {
+	font-family: 'Open-sans', Helvetica, Sans-serif;
+	font-size: 10px;
+	margin-top: -3px;
+	margin-left: 10px;
+}
+.profile-picture {
+	width: 40px;
+	vertical-align: middle;
+}

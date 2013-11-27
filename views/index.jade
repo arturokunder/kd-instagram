@@ -17,14 +17,57 @@ block content
 		var posts = !{JSON.stringify(postByDay)}	
 	
 	#panel
-		#posts-day(style="text-align: center")
-		.total(style="display: block")
+		#posts-day(style="text-align: center; display: inline-block")
+		.total(style="display: inline-block")
 			p
 				span.total-posts
 					|  #{ count }
 				br
 				span.total-posts-text Posts totales
 		.clearfix
+		
+		#info
+			.row
+				.col-sm-6.col-sm-offset-3.line-right
+					h3(style="text-align: center") Usuarios m&aacute;s activos
+					table.table.table-hover
+						thead
+							tr
+								th(style="width:20px")
+									| 
+								th(style="width:70px")
+								th
+									| Nombre
+								th
+									| Publicaciones
+						tbody#influyentes-table-body
+							for u, i in most_active
+								tr
+									td #{ i + 1 }
+									td
+										img.load.img-circle.profile-picture(src="#{ u._id.picture }")
+									td
+										a(href="http://instagram.com/#{u._id.username}", target="_blank")
+											span.username #{ u._id.username }
+											br
+											span.fullname #{ u._id.full_name }
+									td
+										| #{ u.posts }
+				//
+					.col-sm-6
+						h3(style="text-align: center") Hashtags m&aacute;s utilizados
+						table.table.table-hover
+							thead
+								tr
+									th(style="width:20px")
+										| 
+									th
+										| Hashtag
+									th(style="width:100px")
+										| Cantidad
+									th(style="min-width:150px")
+							tbody#hashtags-table-body
+								tr
 	
 	script(type='text/javascript').
 		kunder.Instagram.Index.Initialize();

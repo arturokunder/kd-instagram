@@ -4,6 +4,16 @@ kunder.Instagram.Index = (function($) {
 	
 	function _initialize() {
 		_postsByDay(posts);
+		
+		$(document).ready(function() {
+			$('img.load').each(function(i, item){
+				$(item).attr('src', $(item).data('src'));
+				$(item).removeClass('load');
+				$(item).error(function(event) {
+					$(this).attr('src', 'img/image-error.png');
+				});
+			});
+		});
 	}
 	
 	function _postsByDay(posts) {
