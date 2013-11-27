@@ -1,0 +1,20 @@
+.total {
+	padding-left: 50px;
+	padding-top: 130px;
+	text-align: center;
+}
+
+.total-posts {
+	font-size: 3.7em;
+	color: #112244;
+	font-weight: bold;
+	text-align: center;
+}
+
+.total-posts-text {
+	color: #314254;
+	text-align: center;
+	font-size: 1.4em;
+	position: relative;
+	top: -20px;
+}

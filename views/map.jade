@@ -1,0 +1,23 @@
+extends layout
+
+block title
+	| Mapa
+
+block js
+	script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUHqmWnbtXXG-7W5HLmGkpmrVfssmsYfc&sensor=false&libraries=visualization")
+	script(type='text/javascript', src='js/lib/MarkerClusterer.js')	
+
+	script(type='text/javascript', src='js/kunder.instagram.map.js')
+	
+block css
+	link(rel='stylesheet', type='text/css', media='screen', href='css/kunder.instagram.index.css')
+
+block content
+	script.
+		var posts = !{JSON.stringify(posts)}	
+		console.log(posts)
+	
+	#post-map(data-map-created="false")
+	
+	script(type='text/javascript').
+		kunder.Instagram.Map.Initialize();

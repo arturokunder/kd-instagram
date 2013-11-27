@@ -16,7 +16,7 @@ exports.index = function(req, res){
 	                         ],
         function(err, doc) {
 			postsDB.count(function(err2, count) {
-				res.render('index', { postByDay: _dayCorrection(doc), count : count });
+				res.render('index', { title : 'index', postByDay: _dayCorrection(doc), count : count });
 			});
 			
 		});
@@ -25,16 +25,145 @@ exports.index = function(req, res){
 exports.posts = function(req, res) {
 	postsDB.find().sort({ created_time : -1 }).limit(30, function(err, docs){
 		if(!err) {
-			res.render('posts', { posts: docs });
+			var first_object = 0;
+			var last_object = 0;
+			
+			if(docs.length > 0) {
+				first_object = docs[0]._id;
+				last_object = docs[0]._id;
+				
+				console.log(first_object);
+				for(var i = 0; i < docs.length; i++) {
+					var object = docs[i]._id;
+
+					if(first_object > object) {
+						first_object = object;
+					}
+					if(last_object < object) {
+						last_object = object;
+					}
+				}
+			}
+			res.render('posts', { title : 'posts', posts: docs, first_object : first_object, last_object : last_object  });
 		}
 	});
 	
 };
 
+exports.map = function(req, res) {
+	var now = new Date();
+	var limit = 1;
+	postsDB.find(
+			{ location : { '$ne' : null }},
+			{ 'location' : 1 })
+			.sort({ created_time : -1 })
+			.limit(limit, function(err, docs){
+		if(!err) {
+			var end = new Date();
+			console.log('1 dato : ' + (end - start) + 'ms');
+		}
+	});
+	
+	var now = new Date();
+	var limit = 100;
+	postsDB.find(
+			{ location : { '$ne' : null }},
+			{ 'location' : 1 })
+			.sort({ created_time : -1 })
+			.limit(limit, function(err, docs){
+		if(!err) {
+			var end = new Date();
+			console.log('100 datos : ' + (end - start) + 'ms');
+		}
+	});
+	
+	var start = new Date();
+	var limit = 1000;
+	postsDB.find(
+			{ location : { '$ne' : null }},
+			{ 'location' : 1 })
+			.sort({ created_time : -1 })
+			.limit(limit, function(err, docs){
+		if(!err) {
+			var end = new Date();
+			console.log('1.000 datos : ' + (end - start) + 'ms');
+		}
+	});
+	
+	var start = new Date();
+	var limit = 5000;
+	postsDB.find(
+			{ location : { '$ne' : null }},
+			{ 'location' : 1 })
+			.sort({ created_time : -1 })
+			.limit(limit, function(err, docs){
+		if(!err) {
+			var end = new Date();
+			console.log('5.000 datos : ' + (end - start) + 'ms');
+		}
+	});
+	
+	var start = new Date();
+	var limit = 10000;
+	postsDB.find(
+			{ location : { '$ne' : null }},
+			{ 'location' : 1 })
+			.sort({ created_time : -1 })
+			.limit(limit, function(err, docs){
+		if(!err) {
+			var end = new Date();
+			console.log('10.000 datos : ' + (end - start) + 'ms');
+		}
+	});
+	
+	var start = new Date();
+	var limit = 28000;
+	postsDB.find(
+			{ location : { '$ne' : null }},
+			{ 'location' : 1 })
+			.sort({ created_time : -1 })
+			.limit(limit, function(err, docs){
+		if(!err) {
+			var end = new Date();
+			console.log('28.000 datos : ' + (end - start) + 'ms');
+		}
+	});
+	
+	
+	postsDB.find(
+			{ location : { '$ne' : null }},
+			{ 'location' : 1 })
+			.sort({ created_time : -1 })
+			.limit(10000, function(err, docs){
+		if(!err) {
+			res.render('map', { title : 'map', posts: docs  });
+		}
+	});
+};
+
 exports.config = function(req, res) {
-	tagsDB.find().sort({ tag : -1 }, function(err, docs){
-		if(!err && docs){
-			res.render('config', { tags : docs });
+	postsDB.find().sort({ created_time : -1 }).limit(30, function(err, docs){
+		if(!err) {
+			var first_object = 0;
+			var last_object = 0;
+			
+			if(docs.length > 0) {
+				first_object = docs[0]._id;
+				last_object = docs[0]._id;
+				
+				console.log(first_object);
+				for(var i = 0; i < docs.length; i++) {
+					var object = docs[i]._id;
+
+					if(first_object > object) {
+						first_object = object;
+					}
+					if(last_object < object) {
+						last_object = object;
+					}
+				}
+			}
+			res.render('posts', { title : 'posts', posts: docs, first_object : first_object, last_object : last_object  });
 		}
 	});
 };

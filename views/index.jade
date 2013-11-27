@@ -3,8 +3,28 @@ extends layout
 block title
 	| Inicio
 
+block js
+	script(type='text/javascript', src='https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%20%221.0%22%2C%22packages%22%3A%20%5B%22corechart%22%2C%22table%22%5D%7D%5D%7D', charset='UTF-8', data-filter='base')
+	script(type='text/javascript', src='js/kunder.instagram.dataTable.js')
+	script(type='text/javascript', src='js/kunder.instagram.charts.js')
+	script(type='text/javascript', src='js/kunder.instagram.index.js')
+	
+block css
+	link(rel='stylesheet', type='text/css', media='screen', href='css/kunder.instagram.index.css')
+
 block content
-	for p in postByDay
-		| #{moment(p.date).format('DD/MM/YYYY')} : #{p.posts}
-		br
-	| count : #{ count }
+	script.
+		var posts = !{JSON.stringify(postByDay)}	
+	
+	#panel
+		#posts-day(style="text-align: center")
+		.total(style="display: block")
+			p
+				span.total-posts
+					|  #{ count }
+				br
+				span.total-posts-text Posts totales
+		.clearfix
+	
+	script(type='text/javascript').
+		kunder.Instagram.Index.Initialize();

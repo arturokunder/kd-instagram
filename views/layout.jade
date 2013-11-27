@@ -85,30 +85,30 @@ html
 					.nav-sidebar.hidden-print(role="complementary")
 						ul.nav.nav-menu
 							
-							li(class="active open-menu")
+							li(class="open-menu #{title == 'index' ? 'active' : ''}")
 								a(href="/")
 									span.menu-icon.pull-left(data-icon='panel')
 									span.hidden-sm Panel
 									span.visible-sm &nbsp;
 							
-							li(class="")
+							li(class=" #{title == 'posts' ? 'active' : ''}")
 								a(href="/posts")
 									span.menu-icon.pull-left(data-icon='tweets')
 									span.hidden-sm Publicaciones
 									span.visible-sm &nbsp;
 									
-							li(class="")
+							li(class=" #{title == 'maps' ? 'active' : ''}")
+								a(href="/map")
+									span.menu-icon.pull-left(data-icon='map')
+									span.hidden-sm Mapa
+									span.visible-sm &nbsp;
+							li(class=" #{title == 'config' ? 'active' : ''}")
 								a(href="/config")
 									span.menu-icon.pull-left(data-icon='cloud')
 									span.hidden-sm Configuraci&oacute;n
 									span.visible-sm &nbsp;		
 							
-							li(class="")
-								a(href="")
-									span.menu-icon.pull-left(data-icon='map')
-									span.hidden-sm 
-										| Menu 4
-									span.visible-sm &nbsp;
+
 								
 				.col-xs-12.col-sm-10.col-md-9.col-lg-10.content-column(role="main")
 					.pull-right.content-menu
