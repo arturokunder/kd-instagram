@@ -1,10 +1,13 @@
 extends layout
 
 block js
-	script(type='text/javascript', src='js/kunder.instagram.posts.js')
+	script(type='text/javascript', src='/js/lib/waypoints/waypoints.min.js')
+	script(type='text/javascript', src='/js/lib/waypoints/waypoints-infinite.min.js')
+	script(type='text/javascript', src='/js/kunder.instagram.posts.js')
+	
 
 block css
-	link(rel='stylesheet', type='text/css', media='screen', href='css/kunder.instagram.posts.css')
+	link(rel='stylesheet', type='text/css', media='screen', href='/css/kunder.instagram.posts.css')
 
 block title
 	| Configuraci&oacute;n
@@ -13,47 +16,55 @@ block content
 	input#last-post(type="hidden", name="last", value="#{last_object}")
 	input#first-post(type="hidden", name="first", value="#{first_object}")
 	.new-posts
-		| 50 nuevos
-	each p in posts
-		.post
-			if p.link
-				a.pull-right(href="#{p.link}", target="_blank")
-					span.glyphicon.glyphicon-share-alt
-					
-			if p.user && p.user.username
-				.user
-					a(href="http://instagram.com/#{p.user.username}", target="_blank")
-						if p.user.profile_picture
-							.profile-picture
-								img.load.img-circle(data-src="#{p.user.profile_picture}")
-						.username
-							| #{p.user.username}
-							if p.user.full_name
-								.fullname
-									| #{ p.user.full_name }
-							if p.created_time	
-								.created_time
-									| #{ moment(p.created_time).fromNow() }
-			
-			if p.videos && p.videos.low_resolution
-				.video
-					video.load.img-thumbnail(data-src="#{p.videos.low_resolution.url}")
-						| Video no soportado
+		span.badge.number
+	
+	.infinite-posts
+		each p in posts
+			.post
+				if p.link
+					a.pull-right(href="#{p.link}", target="_blank")
+						span.glyphicon.glyphicon-share-alt
+						
+				if p.user && p.user.username
+					.user
+						a(href="http://instagram.com/#{p.user.username}", target="_blank")
+							if p.user.profile_picture
+								.profile-picture
+									img.load.img-circle(data-src="#{p.user.profile_picture}")
+							.username
+								| #{p.user.username}
+								if p.user.full_name
+									.fullname
+										| #{ p.user.full_name }
+								if p.created_time	
+									.created_time
+										| #{ moment(p.created_time).fromNow() }
 				
-			if p.images && p.images.low_resolution.url
-				.picture(class="#{p.videos && p.videos.low_resolution ? 'is-video': ''}")
-					img.load.img-thumbnail(data-src="#{p.images.low_resolution.url}")
-					if p.videos && p.videos.low_resolution
-						.play-video
-							span.glyphicon.glyphicon-play-circle
+				if p.videos && p.videos.low_resolution
+					.video
+						video.load.img-thumbnail(data-src="#{p.videos.low_resolution.url}")
+							| Video no soportado
 					
-			if p.caption && p.caption.text
-				.caption
-					if p.caption.text.length >= 200
-						| #{ p.caption.text.substring(0, 197) }...
-					else
-						| #{p.caption.text}
-			
+				if p.images && p.images.low_resolution.url
+					.picture(class="#{p.videos && p.videos.low_resolution ? 'is-video': ''}")
+						img.load.img-thumbnail(data-src="#{p.images.low_resolution.url}")
+						if p.videos && p.videos.low_resolution
+							.play-video
+								span.glyphicon.glyphicon-play-circle
+						
+				if p.caption && p.caption.text
+					.caption
+						if p.caption.text.length >= 200
+							| #{ p.caption.text.substring(0, 197) }...
+						else
+							| #{p.caption.text}
+	
+	.clearfix	
+	.more-posts-tools		
+		a.more-posts-link.btn.btn-default.btn-lg(href="/posts/last/#{first_object}") Cargar m&aacute;s
+																																																
+		.more-posts-loading.progress.progress-striped.active
+			.progress-bar.progress-bar-success(role='progressbar', aria-valuenow='100', aria-valuemin='0', aria-valuemax='100', style='width: 100%;')
 	
 	script(type='text/javascript').
 		kunder.Instagram.Posts.Initialize();

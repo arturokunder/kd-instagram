@@ -23,7 +23,14 @@ exports.index = function(req, res){
 };
 
 exports.posts = function(req, res) {
-	postsDB.find().sort({ created_time : -1 }).limit(30, function(err, docs){
+	var query = {};
+	if(req.params.last) {
+		query._id = {
+			'$lt' : global.mongojs.ObjectId(req.params.last)
+		};
+	}
+	
+	postsDB.find(query).sort({ created_time : -1 }).limit(30, function(err, docs){
 		if(!err) {
 			var first_object = 0;
 			var last_object = 0;

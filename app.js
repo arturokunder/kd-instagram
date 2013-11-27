@@ -53,6 +53,7 @@ if ('development' === app.get('env')) {
 //WEB
 app.get('/', routes.index);
 app.get('/posts', routes.posts);
+app.get('/posts/last/:last', routes.posts);
 app.get('/map', routes.map);
 app.get('/config', routes.config);
 

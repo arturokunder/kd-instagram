@@ -90,3 +90,29 @@
 	font-size: 12px;
 	word-wrap: break-word;
 }
+
+.more-posts-tools {
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 90%;
+	text-align: center;
+}
+
+.more-posts-loading {
+	display: none;
+}
+
+.new-posts {
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 90%;
+	text-align: center;
+}
+
+.new-posts .number {
+	font-family: 'Open-sans', Helvetica, Sans-serif;
+}
