@@ -19,9 +19,13 @@ exports.registerSavedTags = function() {
 		if(!err && docs) {
 			var completed = function() {};
 			for(var i = 0; i < docs.length; i++) {
+				var callback_url = 'http://glacial-sands-1133.herokuapp.com/instagram/endpoint';
+				if(process.env.INSTAGRAM_CALLBACK_URL) {
+					callback_url = process.env.INSTAGRAM_CALLBACK_URL;
+				}
 				instagram_lib.tags.subscribe({
 					object_id : docs[i].tag,
-					callback_url : 'http://glacial-sands-1133.herokuapp.com/instagram/endpoint',
+					callback_url : callback_url,
 					verify_token : '56231201',
 					complete : completed
 				});
