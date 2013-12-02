@@ -19,9 +19,9 @@ if (process.env.MONGOLAB_URI) {
 }
 
 var instagram_lib = global.instagram_lib = require('instagram-node-lib');
-if(process.env.instagram && process.env.instagram.client_id && process.env.instagram.client_secret) {
-	instagram_lib.set('client_id', process.env.instagram.client_id);
-	instagram_lib.set('client_secret', process.env.instagram.client_secret);
+if(process.env.INSTAGRAM_CLIENT_ID && process.env.INSTAGRAM_CLIENT_SECRET) {
+	instagram_lib.set('client_id', process.env.INSTAGRAM_CLIENT_ID);
+	instagram_lib.set('client_secret', process.env.INSTAGRAM_CLIENT_SECRET);
 }
 else {
 	instagram_lib.set('client_id', settings.instagram.client_id);
